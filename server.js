@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 
 //Connexion à la base de donnée, tuto "ancien" car besoin de rajouter ,{ useNewUrlParser: true ,useUnifiedTopology:true} au constructeur MongoClient pour enlever des warnings
 mongoose
-    .connect("mongodb://localhost/db",{ useNewUrlParser: true ,useUnifiedTopology:true})
+    .set('useCreateIndex', true)
+    .connect("mongodb://localhost/db", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("Connected to mongoDB");
     })
@@ -40,7 +41,7 @@ app.use("/user", router);
 require(__dirname + "/controllers/userController")(router);
 
 
-//On définit la route Hello
+// On définit la route Hello
 app.get('/hello', function (req, res) {
     res.json("Hello World")
 })
